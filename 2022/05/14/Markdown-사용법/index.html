@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Goat95">
+
+
+
+
+
+<title>Markdown 사용법 | Goat95&#39;s</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Goat95&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Goat95&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expandToc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Markdown 사용법</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Goat95</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">May 14, 2022&nbsp;&nbsp;2:03:47</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/ETC/">ETC</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="제목-Header"><a href="#제목-Header" class="headerlink" title="제목(Header)"></a>제목(Header)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 제목 1</span><br><span class="line">## 제목 2</span><br><span class="line">### 제목 3</span><br><span class="line">#### 제목 4</span><br><span class="line">##### 제목 5</span><br><span class="line">###### 제목 6</span><br></pre></td></tr></table></figure>
+
+<h1 id="제목-1"><a href="#제목-1" class="headerlink" title="제목 1"></a>제목 1</h1><h2 id="제목-2"><a href="#제목-2" class="headerlink" title="제목 2"></a>제목 2</h2><h3 id="제목-3"><a href="#제목-3" class="headerlink" title="제목 3"></a>제목 3</h3><h4 id="제목-4"><a href="#제목-4" class="headerlink" title="제목 4"></a>제목 4</h4><h5 id="제목-5"><a href="#제목-5" class="headerlink" title="제목 5"></a>제목 5</h5><h6 id="제목-6"><a href="#제목-6" class="headerlink" title="제목 6"></a>제목 6</h6><h1 id="문장-Paragraph"><a href="#문장-Paragraph" class="headerlink" title="문장(Paragraph)"></a>문장(Paragraph)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">동해물과 백두산이 마르고 닳도록</span><br><span class="line">하느님이 보우하사 우리나라 만세</span><br></pre></td></tr></table></figure>
+
+<p>동해물과 백두산이 마르고 닳도록<br>하느님이 보우하사 우리나라 만세</p>
+<h1 id="줄바꿈-Line-Breaks"><a href="#줄바꿈-Line-Breaks" class="headerlink" title="줄바꿈(Line Breaks)"></a>줄바꿈(Line Breaks)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">동해물과 백두산이 마르고 닳도록</span><br><span class="line">하느님이 보우하사 우리나라 만세&lt;br/&gt;</span><br><span class="line">무궁화 삼천리 화려 강산&lt;br/&gt;</span><br><span class="line">대한 사람 대한으로 길이 보전하세</span><br></pre></td></tr></table></figure>
+
+<p>동해물과 백두산이 마르고 닳도록<br>하느님이 보우하사 우리나라 만세<br/><br>무궁화 삼천리 화려 강산<br/><br>대한 사람 대한으로 길이 보전하세</p>
+<h1 id="강조-Emphasis"><a href="#강조-Emphasis" class="headerlink" title="강조(Emphasis)"></a>강조(Emphasis)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_이텔릭_</span><br><span class="line">**두껍게**</span><br><span class="line">**_이텔릭 + 두껍게_**</span><br><span class="line">~~취소선~~</span><br><span class="line">&lt;u&gt;밑줄&lt;/u&gt;</span><br></pre></td></tr></table></figure>
+
+<p><em>이텔릭</em><br><strong>두껍게</strong><br><strong><em>이텔릭 + 두껍게</em></strong><br><del>취소선</del><br><u>밑줄</u></p>
+<h1 id="목록-List"><a href="#목록-List" class="headerlink" title="목록(List)"></a>목록(List)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1. 순서가 필요한 목록</span><br><span class="line">1. 순서가 필요한 목록</span><br><span class="line">1. 순서가 필요한 목록</span><br><span class="line">   1. 순서가 필요한 목록</span><br><span class="line">   1. 순서가 필요한 목록</span><br><span class="line">1. 순서가 필요한 목록</span><br><span class="line"></span><br><span class="line">- 순서가 필요하지 않은 목록</span><br><span class="line">- 순서가 필요하지 않은 목록</span><br><span class="line">- 순서가 필요하지 않은 목록</span><br><span class="line">  - 순서가 필요하지 않은 목록</span><br><span class="line">  - 순서가 필요하지 않은 목록</span><br><span class="line">- 순서가 필요하지 않은 목록</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>순서가 필요한 목록</li>
+<li>순서가 필요한 목록</li>
+<li>순서가 필요한 목록<ol>
+<li>순서가 필요한 목록</li>
+<li>순서가 필요한 목록</li>
+</ol>
+</li>
+<li>순서가 필요한 목록</li>
+</ol>
+<ul>
+<li>순서가 필요하지 않은 목록</li>
+<li>순서가 필요하지 않은 목록</li>
+<li>순서가 필요하지 않은 목록<ul>
+<li>순서가 필요하지 않은 목록</li>
+<li>순서가 필요하지 않은 목록</li>
+</ul>
+</li>
+<li>순서가 필요하지 않은 목록</li>
+</ul>
+<h1 id="링크-Links"><a href="#링크-Links" class="headerlink" title="링크(Links)"></a>링크(Links)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;https://google.com&quot;&gt;GOOGLE&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">[GOOGLE](https://google.com)</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;https://naver.com&quot; title=&quot;Naver로 이동!&quot;&gt;NAVER&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">[NAVER](https://naver.com &quot;Naver로 이동!&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://google.com">GOOGLE</a></p>
+<p><a target="_blank" rel="noopener" href="https://google.com/">GOOGLE</a></p>
+<p><a target="_blank" rel="noopener" href="https://naver.com" title="Naver로 이동!">NAVER</a></p>
+<p><a target="_blank" rel="noopener" href="https://naver.com/" title="Naver로 이동!">NAVER</a></p>
+<h1 id="이미지-Images"><a href="#이미지-Images" class="headerlink" title="이미지(Images)"></a>이미지(Images)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">![HEROPY](https://heropy.blog/css/images/logo.png)</span><br><span class="line"></span><br><span class="line">[![HEROPY](https://heropy.blog/css/images/logo.png)](https://naver.com)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://heropy.blog/css/images/logo.png" alt="HEROPY"></p>
+<p><a target="_blank" rel="noopener" href="https://naver.com/"><img src="https://heropy.blog/css/images/logo.png" alt="HEROPY"></a></p>
+<h1 id="인용문-BlockQuote"><a href="#인용문-BlockQuote" class="headerlink" title="인용문(BlockQuote)"></a>인용문(BlockQuote)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; 남의 말이나 글에서 직접 또는 간접으로 따온 문장.</span><br><span class="line">&gt; (네이버 국어 사전)</span><br><span class="line"></span><br><span class="line">&gt; 인용문을 작성하세요!</span><br><span class="line">&gt;</span><br><span class="line">&gt; &gt; 중첩된 인용문</span><br><span class="line">&gt; &gt;</span><br><span class="line">&gt; &gt; &gt; 중중첩된 인용문 1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>남의 말이나 글에서 직접 또는 간접으로 따온 문장.<br>(네이버 국어 사전)</p>
+</blockquote>
+<blockquote>
+<p>인용문을 작성하세요!</p>
+<blockquote>
+<p>중첩된 인용문</p>
+<blockquote>
+<p>중중첩된 인용문 1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h1 id="인라인-inline-코드-강조"><a href="#인라인-inline-코드-강조" class="headerlink" title="인라인(inline) 코드 강조"></a>인라인(inline) 코드 강조</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">css에서 `background` 혹은 `background-image` 속성으로 요소에 배경 이미지를 삽입할 수 있습니다.</span><br></pre></td></tr></table></figure>
+
+<p>css에서 <code>background</code> 혹은 <code>background-image</code> 속성으로 요소에 배경 이미지를 삽입할 수 있습니다.</p>
+<h1 id="블록-block-코드-강조"><a href="#블록-block-코드-강조" class="headerlink" title="블록(block) 코드 강조"></a>블록(block) 코드 강조</h1><p>“&#96;&#96;&#96;” 으로 감싸서 코드 강조</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://www.google.co.kr/&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>GOOGLE<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m <span class="string">&#x27;Study Markdown`</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">동해물과 백두산이 마르고 닳도록</span><br><span class="line">하느님이 보우하사 우리나라 만세</span><br></pre></td></tr></table></figure>
+
+<h1 id="표-Table"><a href="#표-Table" class="headerlink" title="표(Table)"></a>표(Table)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">position 속성</span><br><span class="line"></span><br><span class="line">| 값       |       의미        | 기본값 |</span><br><span class="line">| -------- | :---------------: | -----: |</span><br><span class="line">| static   |     기준 없음     |      O |</span><br><span class="line">| relative |     요소 자신     |      X |</span><br><span class="line">| absolute | 위치 상 부모 요소 |      X |</span><br><span class="line">| fixed    |      뷰포트       |      X |</span><br></pre></td></tr></table></figure>
+
+<h1 id="원시-HTML-Raw-HTML"><a href="#원시-HTML-Raw-HTML" class="headerlink" title="원시 HTML(Raw HTML)"></a>원시 HTML(Raw HTML)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">동해물과 &lt;span style=&quot;text-decoration: underline;&quot;&gt;백두산&lt;/span&gt;이 마르고 닳도록&lt;br/&gt;</span><br><span class="line">하느님이 보우하사 우리나라 만세</span><br></pre></td></tr></table></figure>
+
+<h1 id="수평선-Horizontal-Rule"><a href="#수평선-Horizontal-Rule" class="headerlink" title="수평선(Horizontal Rule)"></a>수평선(Horizontal Rule)</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Goat95</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://goat95.github.io/2022/05/14/Markdown-%EC%82%AC%EC%9A%A9%EB%B2%95/">https://goat95.github.io/2022/05/14/Markdown-%EC%82%AC%EC%9A%A9%EB%B2%95/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Markdown/"># Markdown</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2022/05/13/TIL220513/">TIL220513</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Goat95 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
