@@ -13,7 +13,7 @@
 
 
 
-<title>TIL220517 | Goat95&#39;s</title>
+<title>TIL220518 | Goat95&#39;s</title>
 
 
 
@@ -131,7 +131,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">TIL220517</h1>
+            <h1 class="post-title">TIL220518</h1>
             
                 <div class="post-meta">
                     
@@ -140,7 +140,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">May 17, 2022&nbsp;&nbsp;23:52:15</a>
+                        Date: <a href="#">May 18, 2022&nbsp;&nbsp;16:19:39</a>
                         </span>
                     
                     
@@ -157,13 +157,17 @@
 
         <div class="post-content">
             <ul>
-<li>오늘은 저번 토이 프로젝트를 리액트로 리팩토링하기 위한 회의를 위해 조원분들과 만났다.</li>
-<li>타입스크립트를 사용하기로 했고, 컴포넌트 구조는 각자 짜기로 했다.<ul>
-<li>컴포넌트 구조도 같이 짤려고 했으나, 모두 리액트는 처음이기 때문에 각자 한 후 공유하기로 했다.</li>
+<li>오늘은 <a target="_blank" rel="noopener" href="https://ko.javascript.info/">모던 자바스크립트</a>를 보면서 자바스크립트를 공부했다.</li>
+<li>2.1에서 스크립트를 별도 파일에 작성하면 브라우저가 스크립트를 다운받아 **<em>캐시</em>**에 저장하기 때문에, 성능상 이점이 있다라는 것을 배웠다.<ul>
+<li>여러 페이지에서 동일한 스크립트를 사용할 경우 브라우저는 페이지가 바뀔 때마다 스크립트를 새로 다운받는 것이 아니고,</li>
+<li>캐시로부터 스크립트를 가져와 사용하기 때문에 스크립트 파일을 한 번만 다운 받으면 되서 트래픽이 절약되고 웹 페이지의 속도가 빨라진다.</li>
 </ul>
 </li>
-<li>저번 토이 프로젝트에서 반복되는 부분이 많아서 코드가 아주 지저분 했었는데, 이번에 리팩토링하면서 고쳐봐야겠다.</li>
-<li>그리고 시간이 없어서 못했던 차트 부분도 추가로 해봐야겠다.</li>
+<li>2.5 자료형에서 자바스크립트에서 말이 안 되는 수학 연산을 하더라도 스크립트는 에러를 내뿜으며 죽지 않고, NaN을 반환하며 연산이 종료된다는 것을 배웠다.<ul>
+<li>typeof null의 결과는 “object”인데, null은 고유한 자료형을 가지는 특수 값으로 객체가 아니지만, 하위 호환성을 유지하기 위해 이런 오류를 수정하지 않고 남겨둔 상태이다. 언어 자체의 오류이므로 null은 객체가 아니다.</li>
+</ul>
+</li>
+<li>2.6 alert, prompt, confirm을 이용한 상호작용에서 세 함수는 모달 창을 띄워주는데, 모달 창이 떠 있는 동안은 스크립트의 실행이 일시 중단되 사용자가 창을 닫기 전까진 나머지 페이지와 상호 작용이 불가능하다는 것을 배웠다.</li>
 </ul>
 
         </div>
@@ -179,7 +183,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://goat95.github.io/2022/05/17/TIL220517/">https://goat95.github.io/2022/05/17/TIL220517/</a></span>
+                        <span><a href="https://goat95.github.io/2022/05/18/TIL220518/">https://goat95.github.io/2022/05/18/TIL220518/</a></span>
                     </p>
                 
                 
@@ -205,6 +209,8 @@
                     
                         <a href="/tags/TIL/"># TIL</a>
                     
+                        <a href="/tags/JS/"># JS</a>
+                    
                         
                 </span>
             </div>
@@ -216,10 +222,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/05/18/TIL220518/">TIL220518</a>
             
-            
-            <a class="next" rel="next" href="/2022/05/16/TIL220516/">TIL220516</a>
+            <a class="next" rel="next" href="/2022/05/17/TIL220517/">TIL220517</a>
             
         </section>
 
