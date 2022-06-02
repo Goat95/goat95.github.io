@@ -127,6 +127,65 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expandToc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
@@ -144,12 +203,21 @@
                         </span>
                     
                     
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Today-I-Learned/">Today I Learned</a>
+                            
+                        </span>
+                    
                 </div>
             
         </header>
 
         <div class="post-content">
-            <p><img src="/" alt="TIL"></p>
+            <p><img src="https://github.com/Goat95/goat95.github.io/blob/main/image/TIL.png" alt="TIL"></p>
+<h2 id="조별-실습"><a href="#조별-실습" class="headerlink" title="조별 실습"></a>조별 실습</h2><p>오늘은 조별 실습을 진행했다. <br/><br>조별 실습 내용은 회원가입, 로그인, 글 등록 기능을 구현하는 것이었다.<br /><br>고차함수를 사용하는 방법을 배웠다.</p>
+<h2 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useSelector &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useNavigate &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">RequiredLogin</span>, <span class="title class_">RequiredLogout</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./userAccessType.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">UserCheck</span>(<span class="params">SpecificComponent, option = <span class="literal">null</span></span>) &#123;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">UserCheck</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="title function_">useSelector</span>(<span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">userSlice</span>);</span><br><span class="line">    <span class="keyword">const</span> navigate = <span class="title function_">useNavigate</span>();</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (option) &#123;</span><br><span class="line">        <span class="keyword">if</span> (option === <span class="title class_">RequiredLogin</span> &amp;&amp; !user.<span class="property">isLogin</span>) <span class="title function_">navigate</span>(<span class="string">&quot;/login&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (option === <span class="title class_">RequiredLogout</span> &amp;&amp; user.<span class="property">isLogin</span>) <span class="title function_">navigate</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, []);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;option === RequiredLogin ? (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">SpecificComponent</span> &#123;<span class="attr">...props</span>&#125; <span class="attr">user</span>=<span class="string">&#123;user&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        ) : (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">SpecificComponent</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line"><span class="language-xml">        )&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">UserCheck</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -187,6 +255,12 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/TIL/"># TIL</a>
+                    
+                        <a href="/tags/JS/"># JS</a>
+                    
+                        
                 </span>
             </div>
             <div>
