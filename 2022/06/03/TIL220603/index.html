@@ -13,7 +13,7 @@
 
 
 
-<title>TIL220602 | Goat95&#39;s</title>
+<title>TIL220603 | Goat95&#39;s</title>
 
 
 
@@ -190,7 +190,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">TIL220602</h1>
+            <h1 class="post-title">TIL220603</h1>
             
                 <div class="post-meta">
                     
@@ -199,7 +199,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 2, 2022&nbsp;&nbsp;21:09:17</a>
+                        Date: <a href="#">June 3, 2022&nbsp;&nbsp;23:25:58</a>
                         </span>
                     
                     
@@ -216,8 +216,31 @@
 
         <div class="post-content">
             <p><img src="https://raw.githubusercontent.com/Goat95/goat95.github.io/main/image/TIL.png" alt="TIL"></p>
-<h2 id="조별-실습"><a href="#조별-실습" class="headerlink" title="조별 실습"></a>조별 실습</h2><p>오늘은 조별 실습을 진행했다. <br/><br>조별 실습 내용은 회원가입, 로그인, 글 등록 기능을 구현하는 것이었다.<br /><br>고차함수를 사용하는 방법을 배웠다.</p>
-<h2 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useSelector &#125; <span class="keyword">from</span> <span class="string">&quot;react-redux&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; useNavigate &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-dom&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">RequiredLogin</span>, <span class="title class_">RequiredLogout</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./userAccessType.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">UserCheck</span>(<span class="params">SpecificComponent, option = <span class="literal">null</span></span>) &#123;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">UserCheck</span>(<span class="params">props</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="title function_">useSelector</span>(<span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">userSlice</span>);</span><br><span class="line">    <span class="keyword">const</span> navigate = <span class="title function_">useNavigate</span>();</span><br><span class="line"></span><br><span class="line">    <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (option) &#123;</span><br><span class="line">        <span class="keyword">if</span> (option === <span class="title class_">RequiredLogin</span> &amp;&amp; !user.<span class="property">isLogin</span>) <span class="title function_">navigate</span>(<span class="string">&quot;/login&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (option === <span class="title class_">RequiredLogout</span> &amp;&amp; user.<span class="property">isLogin</span>) <span class="title function_">navigate</span>(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, []);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;option === RequiredLogin ? (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">SpecificComponent</span> &#123;<span class="attr">...props</span>&#125; <span class="attr">user</span>=<span class="string">&#123;user&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        ) : (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">SpecificComponent</span> &#123;<span class="attr">...props</span>&#125; /&gt;</span></span></span><br><span class="line"><span class="language-xml">        )&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">UserCheck</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h2><ul>
+<li>facebook에서 고안한 어플리케이션 아키텍쳐</li>
+<li>flux 아키텍쳐의 가장 큰 특징: 단방향 데이터 흐름</li>
+</ul>
+<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><ul>
+<li>redux &#x3D; reducer + flux</li>
+<li>flux 아키텍쳐에 reducer라는 개념을 도입</li>
+<li>모든 전역 state를 하나의 거대한 object에 모두 담음</li>
+</ul>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><ul>
+<li>action은 평범한 javascript 객체</li>
+<li>type 필드를 필수적으로 가지고 있어야함</li>
+<li>일반적으로 payload 필드에 데이터를 넣는다</li>
+</ul>
+<h3 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h3><ul>
+<li>flux 아키텍쳐 중 dispatcher를 대체</li>
+<li>현재 state와 들어온 action을 이용하여 다음 state를 결정하는 <code>순수함수</code></li>
+<li>state의 자료형은 자유</li>
+<li>상태를 update한다면 대입 연산이 아닌 다음 state를 반환</li>
+</ul>
+<h3 id="store"><a href="#store" class="headerlink" title="store"></a>store</h3><ul>
+<li>store에 reducer를 등록</li>
+<li>dispatch된 action을 모든 reducer에게 전달</li>
+<li>store가 처음 생성될 때 INIT action을 reducer에게 전달하여 초기 state를 저장</li>
+</ul>
 
         </div>
 
@@ -232,7 +255,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://goat95.github.io/2022/06/02/TIL220602/">https://goat95.github.io/2022/06/02/TIL220602/</a></span>
+                        <span><a href="https://goat95.github.io/2022/06/03/TIL220603/">https://goat95.github.io/2022/06/03/TIL220603/</a></span>
                     </p>
                 
                 
@@ -271,10 +294,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/06/03/TIL220603/">TIL220603</a>
             
-            
-            <a class="next" rel="next" href="/2022/06/02/%EB%93%9C%EB%9E%98%EA%B7%B8-%EC%95%A4-%EB%93%9C%EB%A1%AD-%EB%A7%88%EC%9A%B0%EC%8A%A4-%EC%9D%B4%EB%B2%A4%ED%8A%B8/">드래그 앤 드롭 마우스 이벤트</a>
+            <a class="next" rel="next" href="/2022/06/02/TIL220602/">TIL220602</a>
             
         </section>
 
