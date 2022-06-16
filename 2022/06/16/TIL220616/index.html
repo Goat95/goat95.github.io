@@ -13,7 +13,7 @@
 
 
 
-<title>TIL220615 | Goat95&#39;s</title>
+<title>TIL220616 | Goat95&#39;s</title>
 
 
 
@@ -190,7 +190,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">TIL220615</h1>
+            <h1 class="post-title">TIL220616</h1>
             
                 <div class="post-meta">
                     
@@ -199,7 +199,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 15, 2022&nbsp;&nbsp;22:19:22</a>
+                        Date: <a href="#">June 16, 2022&nbsp;&nbsp;23:04:18</a>
                         </span>
                     
                     
@@ -217,9 +217,13 @@
         <div class="post-content">
             <p><img src="https://raw.githubusercontent.com/Goat95/goat95.github.io/main/image/TIL.png" alt="TIL"></p>
 <blockquote>
-<p>MiniProject 3일차. 오늘은 Loading 컴포넌트를 추가했다.<br>그리고 material-ui에서 styled-components로 변경했다.<br>팀원 끼리 한 레포에 머지해서 다시 프로젝트 구조를 짜야 할 것 같다.</p>
+<p>MiniProject 4일차. 오늘은 Clip 컴포넌트를 추가했다.<br>localStorage에 데이터를 저장 했지만, 삭제 시 모든 데이터가 삭제되는 문제가 있다.<br>새로운 배열에 데이터를 저장하고, 삭제 후 다시 그 배열을 localStorage에 저장 해야 할 것 같다.</p>
 </blockquote>
-<h1 id="Loading-jsx"><a href="#Loading-jsx" class="headerlink" title="Loading.jsx"></a>Loading.jsx</h1><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; memo &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactLoading</span> <span class="keyword">from</span> <span class="string">&quot;react-loading&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">LoadingBlock</span> = styled.<span class="property">div</span><span class="string">`</span></span><br><span class="line"><span class="string">  width: 100%;</span></span><br><span class="line"><span class="string">  height: 100vh;</span></span><br><span class="line"><span class="string">  display: flex;</span></span><br><span class="line"><span class="string">  justify-content: center;</span></span><br><span class="line"><span class="string">  text-align: center;</span></span><br><span class="line"><span class="string">  align-items: center;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Loading</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">LoadingBlock</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">ReactLoading</span> <span class="attr">type</span>=<span class="string">&quot;spin&quot;</span> <span class="attr">color</span>=<span class="string">&quot;#A593E0&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">LoadingBlock</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">memo</span>(<span class="title class_">Loading</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="Clip-jsx"><a href="#Clip-jsx" class="headerlink" title="Clip.jsx"></a>Clip.jsx</h1><ul>
+<li>localStorage에 clip한 기사를 저장하고, 화면에 출력한다.</li>
+<li>cancle 버튼을 클릭하면 localStorage에서 데이터를 삭제한다.</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> styled <span class="keyword">from</span> <span class="string">&quot;styled-components&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">NewsClip</span> <span class="keyword">from</span> <span class="string">&quot;../components/NewsClip&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Container</span> = styled.<span class="property">div</span><span class="string">`</span></span><br><span class="line"><span class="string">  max-width: 1100px;</span></span><br><span class="line"><span class="string">  margin: 0 auto;</span></span><br><span class="line"><span class="string">  display: flex;</span></span><br><span class="line"><span class="string">  flex-wrap: wrap;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Clip</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [clipArticle, setClipArticle] = <span class="title function_">useState</span>(</span><br><span class="line">    <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&quot;article&quot;</span>))</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleCancleButton</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setClipArticle</span>(<span class="variable language_">localStorage</span>.<span class="title function_">removeItem</span>(<span class="string">&quot;article&quot;</span>));</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Container</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;clipArticle.map((articleEl) =&gt; (</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">NewsClip</span> <span class="attr">article</span>=<span class="string">&#123;articleEl&#125;</span> <span class="attr">handleCancleButton</span>=<span class="string">&#123;handleCancleButton&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      ))&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Container</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Clip</span>;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -234,7 +238,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://goat95.github.io/2022/06/15/TIL220615/">https://goat95.github.io/2022/06/15/TIL220615/</a></span>
+                        <span><a href="https://goat95.github.io/2022/06/16/TIL220616/">https://goat95.github.io/2022/06/16/TIL220616/</a></span>
                     </p>
                 
                 
@@ -273,10 +277,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/06/16/TIL220616/">TIL220616</a>
             
-            
-            <a class="next" rel="next" href="/2022/06/14/TIL220614/">TIL220614</a>
+            <a class="next" rel="next" href="/2022/06/15/TIL220615/">TIL220615</a>
             
         </section>
 
