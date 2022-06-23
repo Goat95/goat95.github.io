@@ -13,7 +13,7 @@
 
 
 
-<title>TIL220622 | Goat95&#39;s</title>
+<title>TIL220623 | Goat95&#39;s</title>
 
 
 
@@ -127,11 +127,70 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6;    // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function () {
+            tocbot.refresh(obj_merge(tocbot_default_config, { hasInnerContainers: true }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function () {
+        tocbot.init(obj_merge(tocbot_default_config, { collapseDepth: 1 }));
+    });
+
+    function expandToc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, { collapseDepth: expanded ? 1 : DEPTH_MAX }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">TIL220622</h1>
+            <h1 class="post-title">TIL220623</h1>
             
                 <div class="post-meta">
                     
@@ -140,7 +199,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">June 22, 2022&nbsp;&nbsp;22:59:21</a>
+                        Date: <a href="#">June 23, 2022&nbsp;&nbsp;23:06:46</a>
                         </span>
                     
                     
@@ -158,8 +217,9 @@
         <div class="post-content">
             <p><img src="https://raw.githubusercontent.com/Goat95/goat95.github.io/main/image/TIL.png" alt="TIL"></p>
 <blockquote>
-<p>오늘은 FinalProject를 시작했다. Fastcampus 측에서 사용할 만한 API를 제공해줬다.<br>제공된 API를 보고 기획부터 시작했는데 쿠팡이나, 당근마켓 같은 웹을 벤치마킹 하기로 했다.<br>첫날이라 간단한 회의만 했고, 내일도 디자인 구현 및, API에 대해 연구할 것 같다.</p>
+<p>오늘은 FinalProject 2일차….<br>디자인은 피그마를 통해 끝냈고, 마크업은 다음주에 만나서 할 예정이다.<br>Fastcampus 측에서 제공해준 API를 사용하는 대신 Firebase를 사용하기로 했다.<br>Firebase를 사용해 간단한 인증 및 파일 업로드, 실시간 데이터베이스가 가능하기 때문이다.<br>그래서 Firebase 사용법을 공부하기로 했다.</p>
 </blockquote>
+<h1 id="fbase-js"><a href="#fbase-js" class="headerlink" title="fbase.js"></a>fbase.js</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; initializeApp &#125; <span class="keyword">from</span> <span class="string">&quot;firebase/app&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; getAuth &#125; <span class="keyword">from</span> <span class="string">&quot;firebase/auth&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> firebaseConfig = &#123;</span><br><span class="line">  <span class="attr">apiKey</span>: <span class="variable constant_">REACT_APP_KEY</span>,</span><br><span class="line">  <span class="attr">authDomain</span>: <span class="variable constant_">REACT_APP_DOMAIN</span>,</span><br><span class="line">  <span class="attr">projectId</span>: <span class="variable constant_">REACT_APP_PROJECT_ID</span>,</span><br><span class="line">  <span class="attr">storageBucket</span>: <span class="variable constant_">REACT_APP_STORAGE_BUCKET</span>,</span><br><span class="line">  <span class="attr">messagingSenderId</span>: <span class="variable constant_">REACT_APP_SENDER_ID</span>,</span><br><span class="line">  <span class="attr">appId</span>: <span class="variable constant_">REACT_APP_ID</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> app = <span class="title function_">initializeApp</span>(firebaseConfig);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> authService = <span class="title function_">getAuth</span>();</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -174,7 +234,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://goat95.github.io/2022/06/22/TIL220622/">https://goat95.github.io/2022/06/22/TIL220622/</a></span>
+                        <span><a href="https://goat95.github.io/2022/06/23/TIL220623/">https://goat95.github.io/2022/06/23/TIL220623/</a></span>
                     </p>
                 
                 
@@ -213,10 +273,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/06/23/TIL220623/">TIL220623</a>
             
-            
-            <a class="next" rel="next" href="/2022/06/21/TIL220621/">TIL220621</a>
+            <a class="next" rel="next" href="/2022/06/22/TIL220622/">TIL220622</a>
             
         </section>
 
